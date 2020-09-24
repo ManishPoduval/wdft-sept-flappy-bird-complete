@@ -25,7 +25,7 @@ let birdY = 20;
 let birdIncrement = 1;
 
 let pipes = [
-    { x: canvas.width-10, y: 0},
+    { x: canvas.width-10, y: -50},
 ]
 
 document.addEventListener('mousedown', (event) => {
@@ -41,23 +41,25 @@ function startGame(){
     ctx.drawImage(bird, birdX, birdY )
 
     for(let i=0; i< pipes.length; i++){
-        let constant = pipeNorth.height + 100
+        let constant = pipeNorth.height + 150
         ctx.drawImage(pipeNorth, pipes[i].x, pipes[i].y)
         ctx.drawImage(pipeSouth, pipes[i].x, pipes[i].y+ constant)
         pipes[i].x--
         if (pipes[i].x === 10) {
             score++
         }
-        if (pipes[i].x == 30) {
+        if (pipes[i].x == 20) {
             pipes.push({
                 x: canvas.width,
                 y: -Math.floor(Math.random() * pipeNorth.height)
             })
         }
-        /* Lab for today*/
-        if ( ) {
-            clearInterval(intervalId)
-            alert('Game Over')
+
+        // Collision logic. Try and break it down to understand. Don't panic
+        if( birdX + bird.width >= pipes[i].x && birdX <= pipes[i].x + pipeNorth.width && (birdY <= pipes[i].y + pipeNorth.height || birdY+bird.height >= pipes[i].y+constant) || birdY + bird.height >=  canvas.height - fg.height){
+            clearInterval(intervalId);
+            alert('GAME OVER');
+            location.reload(); 
         }
     }
     if (birdY > canvas.height-100) {
