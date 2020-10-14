@@ -1,6 +1,6 @@
 let canvas = document.querySelector('canvas')
-canvas.style.border = '2px solid black';
-//branch manish changes
+canvas.style.border = '3px solid grey';
+// new manish changes
 let ctx = canvas.getContext('2d')
 let intervalId = 0;
 
